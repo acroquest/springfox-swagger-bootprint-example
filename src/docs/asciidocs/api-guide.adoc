@@ -1,0 +1,3 @@
+==== Links
+ 
+include::{snippets}/controller-doc/path-parameters.adoc[]

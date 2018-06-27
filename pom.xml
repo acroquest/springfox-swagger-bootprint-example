@@ -15,17 +15,11 @@
   </properties>
 
   <!-- 依存関係 -->
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>io.spring.platform</groupId>
-        <artifactId>platform-bom</artifactId>
-        <version>2.0.1.RELEASE</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.0.3.RELEASE</version>
+  </parent>
 
   <dependencies>
     <!-- Spring -->
@@ -39,50 +33,27 @@
       <groupId>io.springfox</groupId>
       <artifactId>springfox-swagger2</artifactId>
       <version>${springfox.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>io.swagger</groupId>
-          <artifactId>swagger-models</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>io.swagger</groupId>
-          <artifactId>swagger-annotations</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>io.springfox</groupId>
       <artifactId>springfox-swagger-ui</artifactId>
       <version>${springfox.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>io.swagger</groupId>
-          <artifactId>swagger-models</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>io.swagger</groupId>
       <artifactId>swagger-models</artifactId>
       <version>1.5.6</version>
     </dependency>
-    <!--
-    <dependency>
-      <groupId>io.springfox</groupId>
-      <artifactId>springfox-staticdocs</artifactId>
-      <version>${springfox.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.github.robwin</groupId>
-      <artifactId>swagger2markup</artifactId>
-      <version>0.9.2</version>
-    </dependency>
-    -->
 
     <!-- Tests -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.restdocs</groupId>
+      <artifactId>spring-restdocs-mockmvc</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -96,7 +67,30 @@
           <target>${jdk.version}</target>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.asciidoctor</groupId>
+        <artifactId>asciidoctor-maven-plugin</artifactId>
+        <version>1.5.6</version>
+        <executions>
+          <execution>
+            <id>generate-docs</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>process-asciidoc</goal>
+            </goals>
+            <configuration>
+              <backend>html5</backend>
+              <doctype>book</doctype>
+              <attributes>
+                <snippets>${project.build.directory}/generated-snippets</snippets>
+              </attributes>
+              <sourceDirectory>src/docs/asciidocs</sourceDirectory>
+              <outputDirectory>target/generated-docs</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
-  
+
 </project>

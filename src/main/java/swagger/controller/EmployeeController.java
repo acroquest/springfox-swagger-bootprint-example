@@ -5,10 +5,13 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import swagger.entity.Employee;
@@ -17,24 +20,29 @@ import swagger.entity.Employee;
 @RequestMapping("/employee")
 public class EmployeeController {
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public List<Employee> list() {
         // Return employee list
         return new ArrayList<>();
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     public void create(@RequestBody @Valid Employee employee) {
         // Add employee
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public void update(@PathVariable Integer id,
-            @RequestBody @Valid Employee employee) {
+    @GetMapping("/{id}")
+    public Employee get() {
+        // Return employee
+        return new Employee();
+    }
+
+    @PutMapping(value = "/{id}")
+    public void update(@PathVariable Integer id, @RequestBody @Valid Employee employee) {
         // Update employee
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable Integer id) {
         // Delete employee
     }
