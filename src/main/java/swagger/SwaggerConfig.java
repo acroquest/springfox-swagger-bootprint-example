@@ -18,19 +18,17 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {
     @Bean
     public Docket documentation() {
-        return new Docket(DocumentationType.SWAGGER_2).select().apis(
-                RequestHandlerSelectors.any()).paths(
-                        regex("^/(?!error).*$")).build().pathMapping(
-                                "/").apiInfo(metadata());
+        return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any()).paths(
+                regex("^/(?!error).*$")).build().pathMapping("/").apiInfo(metadata());
     }
 
     @Bean
     public UiConfiguration uiConfig() {
+        //return UiConfigurationBuilder.builder().build();
         return UiConfiguration.DEFAULT;
     }
 
     private ApiInfo metadata() {
-        return new ApiInfoBuilder().title("Employee API").version(
-                "1.0").build();
+        return new ApiInfoBuilder().title("Employee API").version("1.0").build();
     }
 }

@@ -2,10 +2,10 @@ package swagger.entity;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -13,9 +13,9 @@ import io.swagger.annotations.ApiModelProperty;
 public class Employee {
     private Integer id;
 
-    private String  name;
+    private String name;
 
-    private Date    birthday;
+    private Date birthday;
 
     @ApiModelProperty(value = "Employee ID.")
     @Range(min = 1, max = 100)

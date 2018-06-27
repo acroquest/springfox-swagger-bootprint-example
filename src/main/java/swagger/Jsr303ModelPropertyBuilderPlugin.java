@@ -1,9 +1,9 @@
 package swagger;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.stereotype.Component;
 
@@ -18,8 +18,7 @@ import springfox.documentation.spi.schema.ModelPropertyBuilderPlugin;
 import springfox.documentation.spi.schema.contexts.ModelPropertyContext;
 
 @Component
-public class Jsr303ModelPropertyBuilderPlugin
-        implements ModelPropertyBuilderPlugin {
+public class Jsr303ModelPropertyBuilderPlugin implements ModelPropertyBuilderPlugin {
 
     @Override
     public boolean supports(DocumentationType delimiter) {
@@ -46,13 +45,11 @@ public class Jsr303ModelPropertyBuilderPlugin
         // 範囲制約を取得する
         Range range = method.getAnnotation(Range.class);
         if (range != null) {
-            builder.allowableValues(new AllowableRangeValues(
-                    Long.toString(range.min()), Long.toString(range.max())));
+            builder.allowableValues(new AllowableRangeValues(Long.toString(range.min()), Long.toString(range.max())));
         }
         Size size = method.getAnnotation(Size.class);
         if (size != null) {
-            builder.allowableValues(new AllowableRangeValues(
-                    Long.toString(size.min()), Long.toString(size.max())));
+            builder.allowableValues(new AllowableRangeValues(Long.toString(size.min()), Long.toString(size.max())));
         }
     }
 }
