@@ -12,7 +12,6 @@
     <jdk.version>1.8</jdk.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <springfox.version>2.6.0</springfox.version>
-    <springfox.staticdocs.version>2.6.1</springfox.staticdocs.version>
   </properties>
 
   <!-- 依存関係 -->
@@ -52,12 +51,6 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>io.springfox</groupId>
-      <artifactId>springfox-staticdocs</artifactId>
-      <version>${springfox.staticdocs.version}</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 
   <build>
@@ -68,6 +61,23 @@
           <source>${jdk.version}</source>
           <target>${jdk.version}</target>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>io.swagger</groupId>
+        <artifactId>swagger-codegen-maven-plugin</artifactId>
+        <version>2.3.1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <inputSpec>${project.build.directory}/swagger.json</inputSpec>
+              <language>html2</language>
+              <output>${project.build.directory}/docs</output>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
