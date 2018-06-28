@@ -5,7 +5,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
-import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.introspect.AnnotatedMethod;
 import com.fasterxml.jackson.databind.introspect.BeanPropertyDefinition;
@@ -17,7 +16,8 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.schema.ModelPropertyBuilderPlugin;
 import springfox.documentation.spi.schema.contexts.ModelPropertyContext;
 
-@Component
+// JSR-303バリデーションはspringfox-bean-validatorsで対応可能になった
+//@Component
 public class Jsr303ModelPropertyBuilderPlugin implements ModelPropertyBuilderPlugin {
 
     @Override
